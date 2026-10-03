@@ -31,6 +31,7 @@
       <div id="sesion" class="sesion oculto">
         <span id="sesion-nombre" class="sesion-nombre"></span>
         <span id="sesion-cupo" class="cupo"></span>
+        <button id="btn-admin" class="btn btn-ghost btn-chico oculto" type="button">Aprobaciones</button>
         <button id="btn-historial" class="btn btn-ghost btn-chico" type="button">Historial</button>
         <button id="btn-salir" class="btn btn-ghost btn-chico" type="button">Salir</button>
       </div>
@@ -224,6 +225,12 @@
     </form>
 
     <div id="resultado" class="informe oculto"></div>
+
+    <section id="panel-admin" class="card historial-card oculto">
+      <h2>Cuentas pendientes de aprobación</h2>
+      <p class="nota">Valida la matrícula en el Foro de Abogados antes de aprobar cada cuenta.</p>
+      <div id="tabla-admin" class="tabla-wrap"></div>
+    </section>
 
     <section id="panel-historial" class="card historial-card oculto">
       <h2>Tus últimas consultas</h2>

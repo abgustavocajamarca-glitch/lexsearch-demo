@@ -150,6 +150,7 @@ function entrarApp(yo) {
   $('#banner-demo').classList.toggle('oculto', !esDemo);
   $('#btn-crear-real').classList.toggle('oculto', ESTATICO);
   $('#sesion-nombre').textContent = yo.usuario.nombre;
+  $('#btn-admin').classList.toggle('oculto', yo.rol !== 'admin');
   $('#sesion-cupo').textContent = esDemo ? 'DEMO' : `${yo.consultasHoy}/${yo.limiteDiario} consultas · 24 h`;
   if (primeraVez) {
     // Datos de ejemplo ya cargados para que se vea el flujo completo con un clic.
@@ -204,6 +205,11 @@ $('#form-registro').addEventListener('submit', async (e) => {
 });
 
 async function entrarDemo() {
+  // En producción la demostración vive en su propia URL.
+  if (cfg.demoUrl) {
+    window.location.href = cfg.demoUrl;
+    return;
+  }
   mostrarError('#err-demo');
   try {
     await api('/demo/entrar', {});
@@ -347,7 +353,13 @@ function pintarInforme(r) {
   cont.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-const fallo = (m) => h('div', { class: 'aviso peligro' }, `No se pudo consultar esta fuente ahora: ${m.error}. Intenta nuevamente o consulta directamente el portal oficial.`);
+const fallo = (m) =>
+  h(
+    'div',
+    { class: 'aviso peligro' },
+    `No se pudo consultar esta fuente ahora (${m.error}). Intenta nuevamente o consúltala directamente en el portal oficial. `,
+    m.url ? h('a', { href: m.url, target: '_blank', rel: 'noopener noreferrer' }, 'Abrir portal oficial →') : null,
+  );
 
 function tarjetaJudicial(m, consulta) {
   const sec = tarjeta('1', 'Procesos judiciales', h('p', { class: 'sub' }, `Fuente: ${m.fuente}.`));
@@ -432,11 +444,13 @@ function tarjetaSri(m) {
     ),
   );
   if (d.establecimientos.length) {
+    const MAX_ESTAB = 25;
     sec.append(
       h('h3', { class: 'sec-sub' }, `Establecimientos (${d.establecimientos.length})`),
+      d.establecimientos.length > MAX_ESTAB ? h('p', { class: 'nota' }, `Se muestran los primeros ${MAX_ESTAB}. El listado completo está en el portal del SRI.`) : null,
       tabla(
         ['N.º', 'Nombre comercial', 'Dirección', 'Estado'],
-        d.establecimientos.map((e) =>
+        d.establecimientos.slice(0, MAX_ESTAB).map((e) =>
           h('tr', {}, h('td', {}, h('span', { class: 'mono' }, e.numero), e.matriz ? h('span', { class: 'chip oro' }, 'Matriz') : null), h('td', {}, e.nombre || '—'), h('td', {}, e.direccion || '—'), h('td', {}, h('span', { class: 'chip ' + (e.estado === 'ABIERTO' ? 'actor' : '') }, e.estado || '—'))),
         ),
       ),
@@ -469,6 +483,54 @@ function tarjetaOficios(lista) {
     tabla(['Entidad a oficiar', 'Dato', 'Fundamento'], lista.map((o) => h('tr', {}, h('td', {}, h('b', {}, o.entidad)), h('td', {}, o.dato), h('td', {}, o.base)))),
   );
 }
+
+// ---------------- Administración (aprobar matrículas) ----------------
+async function cargarPendientes() {
+  const { pendientes } = await api('/admin/pendientes');
+  $('#tabla-admin').replaceChildren(
+    pendientes.length
+      ? tabla(
+          ['Nombre', 'Correo', 'Matrícula', 'Registro', ''],
+          pendientes.map((u) =>
+            h(
+              'tr',
+              {},
+              h('td', {}, h('b', {}, u.nombre)),
+              h('td', {}, u.email),
+              h('td', {}, h('span', { class: 'mono' }, u.matricula)),
+              h('td', {}, h('span', { class: 'mono' }, String(u.creado_en || '').slice(0, 10))),
+              h('td', {}, h('button', { class: 'btn btn-primario btn-chico', type: 'button', 'data-aprobar': u.email }, 'Aprobar')),
+            ),
+          ),
+        )
+      : h('p', {}, 'No hay cuentas pendientes.'),
+  );
+}
+
+$('#btn-admin').addEventListener('click', async () => {
+  const panel = $('#panel-admin');
+  if (!panel.classList.contains('oculto')) return panel.classList.add('oculto');
+  try {
+    await cargarPendientes();
+    panel.classList.remove('oculto');
+    panel.scrollIntoView({ behavior: 'smooth' });
+  } catch (err) {
+    mostrarError('#err-consulta', err.message);
+  }
+});
+
+$('#tabla-admin').addEventListener('click', async (e) => {
+  const email = e.target.dataset?.aprobar;
+  if (!email) return;
+  e.target.disabled = true;
+  try {
+    await api('/admin/aprobar', { email });
+    await cargarPendientes();
+  } catch (err) {
+    mostrarError('#err-consulta', err.message);
+    e.target.disabled = false;
+  }
+});
 
 // ---------------- Historial ----------------
 $('#btn-historial').addEventListener('click', async () => {
