@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="es" data-estatico="true">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LexSearch · Demostración</title>
+  <meta name="description" content="Consulta de información pública sobre demandados para abogados del Ecuador: procesos judiciales y RUC, con guía de oficios al juez.">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="preload" href="fonts/montserrat-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-in">
+      <a class="marca" href="./" aria-label="LexSearch, inicio">
+        <img src="img/lexsearch-logo.webp" alt="LexSearch" width="166" height="44">
+      </a>
+      <nav id="nav-links" class="nav-links" aria-label="Secciones">
+        <a href="#como-funciona">Cómo funciona</a>
+        <a href="#transparencia">Transparencia</a>
+        <a href="#fuentes">Fuentes oficiales</a>
+        <a href="#preguntas">Preguntas frecuentes</a>
+      </nav>
+      <div id="nav-acciones" class="nav-acciones">
+        <a class="btn btn-ghost btn-chico" href="#acceso">Iniciar sesión</a>
+        <button id="btn-demo-nav" class="btn btn-primario btn-chico oculto" type="button">Ver demostración</button>
+      </div>
+      <div id="sesion" class="sesion oculto">
+        <span id="sesion-nombre" class="sesion-nombre"></span>
+        <span id="sesion-cupo" class="cupo"></span>
+        <button id="btn-historial" class="btn btn-ghost btn-chico" type="button">Historial</button>
+        <button id="btn-salir" class="btn btn-ghost btn-chico" type="button">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===================== PORTADA ===================== -->
+  <main id="vista-acceso" class="oculto">
+    <div class="contenedor">
+      <section class="hero">
+        <div>
+          <span class="insignia">Para abogados del Ecuador</span>
+          <h1>Antes de demandar,<br><span class="oro">conoce al demandado.</span></h1>
+          <p class="lead">Reúne en un solo informe la información <strong>pública</strong> de una persona: procesos judiciales como actor o demandado, registro en el SRI y sus establecimientos. Y te indica qué datos son reservados y cómo pedirlos al juez mediante oficio.</p>
+          <div class="cta-fila">
+            <button id="btn-demo" class="btn btn-primario btn-grande oculto" type="button">Ver demostración →</button>
+            <a class="btn btn-ghost btn-grande" href="#como-funciona">Cómo funciona</a>
+          </div>
+          <p id="err-demo" class="error oculto" role="alert"></p>
+          <ul class="garantias">
+            <li>Solo fuentes oficiales y de acceso público</li>
+            <li>Acceso exclusivo para profesionales del derecho</li>
+            <li>Cada consulta queda registrada con su finalidad</li>
+          </ul>
+        </div>
+
+        <div id="acceso" class="acceso-card">
+          <div class="pestanas" role="tablist">
+            <button id="tab-login" class="pestana activa" type="button" role="tab">Ingresar</button>
+            <button id="tab-registro" class="pestana" type="button" role="tab">Registrarme</button>
+          </div>
+
+          <form id="form-login" autocomplete="on">
+            <label>Correo electrónico <input name="email" type="email" required autocomplete="email" placeholder="abogado@estudio.ec"></label>
+            <label>Contraseña <input name="password" type="password" required autocomplete="current-password"></label>
+            <p id="err-login" class="error oculto" role="alert"></p>
+            <button class="btn btn-primario" type="submit">Ingresar a la plataforma</button>
+          </form>
+
+          <form id="form-registro" class="oculto" autocomplete="on">
+            <label>Nombre completo <input name="nombre" required autocomplete="name"></label>
+            <label>Correo electrónico <input name="email" type="email" required autocomplete="email"></label>
+            <label>N.º de matrícula del Foro de Abogados <input name="matricula" required placeholder="17-2015-123"></label>
+            <label>Contraseña (mínimo 10 caracteres) <input name="password" type="password" minlength="10" required autocomplete="new-password"></label>
+            <label class="check">
+              <input name="aceptaTerminos" type="checkbox" required>
+              <span>Soy abogado/a en ejercicio y acepto los <a href="legal.html#terminos" target="_blank" rel="noopener">términos de uso</a> y la <a href="legal.html#privacidad" target="_blank" rel="noopener">política de privacidad</a>.</span>
+            </label>
+            <p id="err-registro" class="error oculto" role="alert"></p>
+            <button class="btn btn-primario" type="submit">Crear cuenta</button>
+          </form>
+        </div>
+      </section>
+    </div>
+
+    <!-- Vista previa (datos ficticios) -->
+    <section class="seccion crema" aria-labelledby="t-preview">
+      <div class="contenedor">
+        <p class="sobretitulo">Vista previa del informe</p>
+        <h2 id="t-preview" class="titulo-seccion">Un informe claro, listo para tu expediente</h2>
+        <p class="sub-seccion">Así se presenta el resultado de una consulta. Los datos de este ejemplo son ficticios.</p>
+        <div class="vista" aria-hidden="true">
+          <div class="vista-barra"><span>INFORME DE INFORMACIÓN PÚBLICA</span><span class="sello-demo">Datos ficticios de demostración</span></div>
+          <div class="vista-cuerpo">
+            <div class="vista-persona">
+              <span class="monograma">RE</span>
+              <div><b>ROBERTO ANDRÉS EJEMPLO DEMOSTRACIÓN</b><span class="mono">C.I. 0999999999 · RUC 0999999999001</span></div>
+            </div>
+            <div class="cifras">
+              <div class="cifra"><b>4</b><span>Procesos</span></div>
+              <div class="cifra dem"><b>3</b><span>Como demandado</span></div>
+              <div class="cifra act"><b>1</b><span>Como actor</span></div>
+              <div class="cifra ali"><b>1</b><span>Alimentos</span></div>
+            </div>
+            <div class="fila-vista"><span class="mono">09209-2026-00412</span><span>Pensión alimenticia · Niñez y Adolescencia</span><span class="chip demandado">Demandado</span></div>
+            <div class="fila-vista"><span class="mono">09209-2024-01877</span><span>Pago de haberes laborales · Trabajo</span><span class="chip demandado">Demandado</span></div>
+            <div class="fila-vista"><span class="mono">09332-2023-03120</span><span>Cobro de dinero · Civil</span><span class="chip actor">Actor</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="como-funciona" class="seccion">
+      <div class="contenedor">
+        <p class="sobretitulo">Metodología</p>
+        <h2 class="titulo-seccion">Cómo funciona LexSearch</h2>
+        <p class="sub-seccion">Tres pasos, siempre con una finalidad profesional declarada.</p>
+        <ol class="pasos">
+          <li><span class="num">1</span><h3>Ingresas el dato</h3><p>Cédula, RUC o nombres y apellidos, y declaras la finalidad profesional de la consulta.</p></li>
+          <li><span class="num">2</span><h3>Consultamos fuentes oficiales</h3><p>Procesos judiciales del Consejo de la Judicatura y catastro público de RUC del SRI, en tiempo real.</p></li>
+          <li><span class="num">3</span><h3>Recibes el informe</h3><p>Resumen, detalle de procesos, fuentes complementarias y la lista de oficios que puedes pedir al juez. Imprimible en PDF.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="fuentes" class="seccion crema">
+      <div class="contenedor">
+        <p class="sobretitulo">Fuentes</p>
+        <h2 class="titulo-seccion">De dónde sale la información</h2>
+        <p class="sub-seccion">Solo registros de acceso público. LexSearch no almacena los resultados de tus consultas.</p>
+        <ol class="pasos">
+          <li><h3>Consejo de la Judicatura</h3><p>Consulta pública de procesos judiciales: número de proceso, materia, judicatura, partes y rol (actor o demandado).</p></li>
+          <li><h3>Servicio de Rentas Internas</h3><p>Catastro público de RUC: estado, actividad económica, régimen y establecimientos. No incluye facturación ni declaraciones.</p></li>
+          <li><h3>Guía de consulta directa</h3><p>Enlaces y pasos para consultar compañías, vehículos, contratación pública, transparencia y registros de la propiedad.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="transparencia" class="seccion">
+      <div class="contenedor">
+        <p class="sobretitulo">Cumplimiento ético y legal</p>
+        <h2 class="titulo-seccion">Transparencia: lo que sí y lo que no</h2>
+        <p class="sub-seccion">Respetamos la reserva legal de la información. Para lo que no es público, te orientamos a pedirlo al juez.</p>
+        <div class="dos-col">
+          <div class="caja si">
+            <h3>Lo que sí consultamos</h3>
+            <ul>
+              <li>Procesos judiciales como actor o demandado</li>
+              <li>RUC, actividad económica y establecimientos</li>
+              <li>Guía de fuentes de consulta directa: compañías, vehículos, propiedades, contratación pública</li>
+            </ul>
+            <p>Información de acceso público.</p>
+          </div>
+          <div class="caja no">
+            <h3>Lo que no consultamos</h3>
+            <ul>
+              <li>Cuentas bancarias y buró de crédito</li>
+              <li>Declaraciones tributarias y facturación</li>
+              <li>IESS, antecedentes penales y denuncias</li>
+            </ul>
+            <p>Información reservada: te indicamos a quién y cómo pedirla al juez por oficio.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="preguntas" class="seccion crema">
+      <div class="contenedor">
+        <p class="sobretitulo">Resolución de dudas</p>
+        <h2 class="titulo-seccion">Preguntas frecuentes</h2>
+        <div class="faq">
+          <details><summary>¿Es legal usar esta herramienta?</summary><p>Consulta únicamente fuentes de acceso público y se ofrece solo a profesionales del derecho con una finalidad legítima declarada, aplicando los principios de finalidad, minimización y seguridad de la Ley Orgánica de Protección de Datos Personales. Lee los <a href="legal.html#terminos">términos</a> y la <a href="legal.html#privacidad">política de privacidad</a>.</p></details>
+          <details><summary>¿Guardan los datos de las personas que consulto?</summary><p>No se guardan los resultados. El registro de uso conserva solo el dato consultado enmascarado, la fecha y la finalidad, durante 365 días.</p></details>
+          <details><summary>¿Por qué no muestra cuentas bancarias o ingresos?</summary><p>Son datos protegidos por reserva legal (bancaria y tributaria). Solo un juez puede ordenar su entrega; el informe te muestra a qué entidades oficiar.</p></details>
+          <details><summary>¿Qué pasa si busco por nombre?</summary><p>Pueden aparecer homónimos. Verifica la identidad con la cédula antes de usar los datos en un proceso.</p></details>
+          <details><summary>¿Puedo ver cómo es antes de registrarme?</summary><p>Sí. La demostración usa una cuenta ficticia con datos inventados, sin consultar a ninguna persona real.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== APLICACIÓN ===================== -->
+  <main id="vista-app" class="app oculto">
+    <div id="banner-demo" class="banner-demo oculto" role="status">
+      <div><b>Modo demostración.</b> Todos los datos de esta cuenta y de los informes son <b>ficticios</b>; no se consulta a ninguna persona real.</div>
+      <button id="btn-crear-real" class="btn btn-ghost btn-chico" type="button">Crear mi cuenta</button>
+    </div>
+
+    <div class="cab-pagina">
+      <h1>Consulta de información pública</h1>
+      <p>Procesos judiciales (Consejo de la Judicatura) y registro de RUC (SRI), con la guía de oficios que puedes solicitar al juez.</p>
+    </div>
+
+    <form id="form-consulta" class="omni">
+      <div class="omni-barra">
+        <label>Buscar por
+          <select id="tipo" name="tipo">
+            <option value="cedula">Cédula / RUC</option>
+            <option value="nombre">Nombres y apellidos</option>
+          </select>
+        </label>
+        <label><span id="etq-valor">Número de cédula o RUC</span>
+          <input id="valor" name="valor" required autocomplete="off" inputmode="numeric" maxlength="80" placeholder="Ej.: 1700000000">
+        </label>
+        <button id="btn-consultar" class="btn btn-oro" type="submit">Consultar</button>
+      </div>
+      <div class="omni-extra">
+        <label>Finalidad de la consulta
+          <select id="finalidad" name="finalidad" required></select>
+        </label>
+        <label>N.º de causa (opcional)
+          <input name="causa" maxlength="40" autocomplete="off" placeholder="Si ya existe">
+        </label>
+      </div>
+      <label class="check">
+        <input id="confirma" name="confirmaFinalidad" type="checkbox" required>
+        <span>Declaro que consulto esta información con fines legítimos de ejercicio profesional y que no la usaré para acoso, discriminación ni otro fin ajeno al proceso.</span>
+      </label>
+      <p id="err-consulta" class="error oculto" role="alert"></p>
+      <div id="estado" class="estado oculto" role="status"></div>
+    </form>
+
+    <div id="resultado" class="informe oculto"></div>
+
+    <section id="panel-historial" class="card historial-card oculto">
+      <h2>Tus últimas consultas</h2>
+      <p class="nota">Por privacidad, el registro guarda el dato consultado solo de forma enmascarada.</p>
+      <div id="tabla-historial" class="tabla-wrap"></div>
+    </section>
+  </main>
+
+  <div id="publicidad-envoltura" class="publicidad-envoltura oculto">
+    <div id="publicidad" class="publicidad"></div>
+  </div>
+
+  <footer class="pie">
+    <div class="pie-in">
+      <div>
+        <span class="logo-pie"><img src="img/lexsearch-logo.webp" alt="LexSearch" width="128" height="34"></span>
+        <p>Herramienta de consulta de información pública para abogados del Ecuador. No sustituye la certificación oficial ni el criterio profesional.</p>
+      </div>
+      <div>
+        <h4>Fuentes</h4>
+        <ul>
+          <li>Consejo de la Judicatura</li>
+          <li>Servicio de Rentas Internas</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Aviso legal</h4>
+        <p>LexSearch consulta únicamente fuentes públicas. La información puede contener errores, homónimos o estar desactualizada; verifícala en la fuente antes de usarla. Su uso indebido es responsabilidad exclusiva del usuario.</p>
+      </div>
+    </div>
+    <div class="pie-base">
+      <span>© 2026 LexSearch. Todos los derechos reservados.</span>
+      <a href="legal.html">Términos de uso y política de privacidad</a>
+    </div>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
