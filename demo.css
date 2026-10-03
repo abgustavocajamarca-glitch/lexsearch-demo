@@ -1,0 +1,15 @@
+@font-face { font-family: Montserrat; font-weight: 800; font-display: swap; src: url("fonts/montserrat-latin-800-normal.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 400; font-display: swap; src: url("fonts/inter-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: Inter; font-weight: 600; font-display: swap; src: url("fonts/inter-latin-600-normal.woff2") format("woff2"); }
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100vh; background: radial-gradient(1100px 620px at 78% 0%, #33270f 0%, #17130c 48%, #0b0a08 100%); color: #f4efe3; font: 400 16px/1.5 Inter, system-ui, sans-serif; }
+main { max-width: 1040px; margin: 0 auto; padding: 1.5rem 1rem 3rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.logo { background: #fff; border-radius: 12px; padding: 8px 16px; display: inline-block; margin-bottom: 1.6rem; }
+.logo img { display: block; height: 46px; width: auto; }
+h1 { font: 800 clamp(1.7rem, 4.4vw, 2.7rem)/1.15 Montserrat, system-ui, sans-serif; letter-spacing: -.02em; margin: 0 0 1.4rem; }
+h1 span { background: linear-gradient(90deg, #a9731f, #f0c866 50%, #c48e2e); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.marco { width: 100%; border: 1px solid rgba(240, 200, 102, .4); border-radius: 14px; overflow: hidden; box-shadow: 0 24px 70px rgba(0, 0, 0, .6); background: #000; }
+video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
+.nota { color: #a8a191; font-size: .8rem; margin: .8rem 0 1.4rem; }
+.boton { display: inline-block; background: linear-gradient(135deg, #a9731f, #c48e2e); color: #fff; font: 600 1rem Inter, sans-serif; text-decoration: none; padding: 15px 30px; border-radius: 10px; box-shadow: 0 2px 14px rgba(169, 115, 31, .45); }
+.boton:hover { filter: brightness(1.08); }
