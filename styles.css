@@ -443,3 +443,9 @@ td .mono { background: var(--crema); border: 1px solid var(--linea); border-radi
 .g-barra-c { fill: var(--oro); } .g-barra-r { fill: var(--obsidiana); }
 .g-etq { font: 600 11px var(--f-texto); fill: var(--pizarra); }
 .g-num { font: 700 11px var(--f-mono); fill: var(--obsidiana); }
+
+/* El cuadro de acceso es blanco aunque el héroe sea oscuro */
+.acceso-card { color: var(--obsidiana); }
+.acceso-estatico h2 { color: var(--obsidiana); }
+.acceso-estatico p { color: var(--pizarra); }
+.nota-demo { font: 600 .85rem var(--f-texto); color: #f0c866; margin: 0 0 .8rem; }
