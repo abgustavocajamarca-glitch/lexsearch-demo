@@ -13,3 +13,6 @@ video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; }
 .nota { color: #a8a191; font-size: .8rem; margin: .8rem 0 1.4rem; }
 .boton { display: inline-block; background: linear-gradient(135deg, #a9731f, #c48e2e); color: #fff; font: 600 1rem Inter, sans-serif; text-decoration: none; padding: 15px 30px; border-radius: 10px; box-shadow: 0 2px 14px rgba(169, 115, 31, .45); }
 .boton:hover { filter: brightness(1.08); }
+.marca-matriz { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: 0 1rem 2rem; }
+.marca-matriz span { font: 600 .62rem Montserrat, system-ui, sans-serif; letter-spacing: .18em; text-transform: uppercase; color: #a8a191; }
+.marca-matriz img { display: block; height: 26px; width: auto; }
